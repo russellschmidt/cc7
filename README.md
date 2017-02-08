@@ -1,24 +1,18 @@
-# README
+# README - CC7
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Climate Cents v6 Rails site (actually version 2 for production purposes)
 
-Things you may want to cover:
+Main dependencies
 
-* Ruby version
+* Ruby 2.3.1
+* Rails 5.0.1
+* Postgresql 9.6.1
 
-* System dependencies
+Additional dependencies
+* Bootstrap-SASS 3.3
+* Autoprefixer-Rails
+* Devise 4.2
 
-* Configuration
+Testing
+* Rspec
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

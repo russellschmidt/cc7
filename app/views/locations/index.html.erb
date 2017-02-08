@@ -1,0 +1,9 @@
+<h1>index</h1>
+<% if @locations.present? %>
+  <h2>Locations</h2>
+  <ul>
+  <% @locations.each do |location| %>
+    <li><%= link_to location.name, location_path(location) %></li>
+  <% end %>
+  <ul>
+<% end %>

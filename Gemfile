@@ -42,7 +42,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~>4.2.0'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'autoprefixer-rails'
-
+gem 'friendly_id', '~> 5.1.0'
 # end RS added
 ###
 

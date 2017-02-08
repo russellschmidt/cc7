@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Location.delete_all
-loc = Location.new(name:"Los Angeles")
+loc = Location.new(name:"Los Angeles", slug="los-angeles")
 loc.save

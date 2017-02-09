@@ -1,7 +1,9 @@
 class Location < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   # must have a name and a slug
   validates_presence_of :name, :slug
 
-  extend FriendlyId
-  friendly_id :name, use: :slugged
+  default_scope {order(name: :asc)}
 end

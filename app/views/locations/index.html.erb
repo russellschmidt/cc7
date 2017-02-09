@@ -1,9 +1,26 @@
-<h1>index</h1>
-<% if @locations.present? %>
-  <h2>Locations</h2>
-  <ul>
-  <% @locations.each do |location| %>
-    <li><%= link_to location.name, location_path(location) %></li>
+<h1>Locations</h1>
+<% if admin_signed_in? %>
+  <% if @locations.present? %>
+    <h2>Locations</h2>
+    <ul>
+    <% @locations.each do |location| %>
+      <li><%= link_to location.name, location_path(location) %>
+          <%= link_to 'Edit', edit_location_path(location) %>
+          <%= link_to 'Delete', location, method: :delete,
+              data: { confirm: "You want to delete this location?"} %>
+
+          </li>
+    <% end %>
+    <ul>
   <% end %>
-  <ul>
+  <%= link_to 'Create location', new_location_path, class: 'btn btn-default' %>
+<% else %>
+  <% if @locations.present? %>
+    <h2>Locations</h2>
+    <ul>
+    <% @locations.each do |location| %>
+      <li><%= link_to location.name, location_path(location) %></li>
+    <% end %>
+    <ul>
+  <% end %>
 <% end %>

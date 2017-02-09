@@ -5,5 +5,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  resources :locations
+  authenticate :admin do
+    resources :locations, only: [:new, :create, :edit, :update, :destroy]
+  end
+  resources :locations, only: [:index, :show]
 end

@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
+
   def index
     @locations = Location.all
   end
@@ -38,11 +40,15 @@ class LocationsController < ApplicationController
   end
 
   def destroy
-
+    Location.friendly.find(params[:id]).destroy
+    flash[:success] = "Location deleted"
+    redirect_to locations_path
   end
 
   private
     def location_params
       params.require(:location).permit(:name, :slug)
     end
+
+
 end

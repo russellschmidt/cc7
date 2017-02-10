@@ -9,4 +9,6 @@ Rails.application.routes.draw do
     resources :locations, only: [:new, :create, :edit, :update, :destroy]
   end
   resources :locations, only: [:index, :show]
+
+  resources :partners
 end

@@ -14,11 +14,23 @@ RSpec.describe Location, type: :model do
     expect(loc).to_not be_valid
   end
 
-  it "does not allow duplicate slugs in records" do
-    loc1 = Location.new(name:"Boston")
-    loc2 = Location.new(name:"Boston")
-    expect(loc2.slug).to be_nil
-  end
+  describe "disallow duplicate records in Location" do
+    before :each do
+      @loc1 = Location.new(name:"Cincinatti")
+      @loc2 = Location.new(name:"Cincinatti")
+    end
 
+    context "duplicate names" do
+      it "does not allow duplicate names in records" do
+        expect(@loc2.id).to be_nil
+      end
+    end
+
+    context "potentially duplicate slugs handled by friendly_id" do
+      it "does not allow duplicate slugs in records" do
+        expect(@loc2.slug).to be_nil
+      end
+    end
+  end
 
 end

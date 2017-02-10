@@ -14,5 +14,9 @@ Additional dependencies
 * Devise 4.2
 
 Testing
-* Rspec
-
+* rspec-rails
+* factory_girl_rails
+* faker
+* capybara
+* guard-rspec
+* launchy

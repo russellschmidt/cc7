@@ -1,0 +1,7 @@
+<h1>Project</h1>
+<% if @project.present? %>
+  <h2><%= @project.name %></h2>
+  <p><%= @project.description %></p>
+<% else %>
+  <h2>No project found</h2>
+<% end %>

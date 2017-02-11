@@ -1,0 +1,7 @@
+<h1>Projects</h1>
+<% if @projects.present? %>
+  <% @projects.each do |project| %>
+    <h2><%= project.name %></h2>
+    <p><%= project.blurb %></p>
+  <% end %>
+<% end %>

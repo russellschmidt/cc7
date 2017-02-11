@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211045601) do
+ActiveRecord::Schema.define(version: 20170211060222) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +60,19 @@ ActiveRecord::Schema.define(version: 20170211045601) do
     t.string   "logo_aws_url"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "slug",        null: false
+    t.integer  "partner_id"
+    t.integer  "location_id"
+    t.text     "blurb"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["location_id"], name: "index_projects_on_location_id"
+    t.index ["partner_id"], name: "index_projects_on_partner_id"
   end
 
 end

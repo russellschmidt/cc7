@@ -1,4 +1,4 @@
-class Location < ApplicationRecord
+class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -6,7 +6,8 @@ class Location < ApplicationRecord
   validates_presence_of :name, :slug
   validates_uniqueness_of :name, :slug
 
-  has_many :projects
+  belongs_to :partner
+  belongs_to :location
 
   default_scope {order(name: :asc)}
 end

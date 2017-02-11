@@ -1,0 +1,7 @@
+<h1>show</h1>
+
+<p>
+  <% if @partner.logo_aws_url.present? %>
+    <img src="<%= @partner.logo_aws_url %>" alt="logo for <%= @partner.name %>">
+  <% end %>
+</p>

@@ -21,3 +21,10 @@
 <section>
   <%= link_to 'locations', locations_path %>
 </section>
+
+<% if @partners.present? %>
+  <%= link_to 'Partners', partners_path %>
+  <% @partners.each do |partner| %>
+    <%= link_to partner.name, partner_path(partner) %>
+  <% end %>
+<% end %>

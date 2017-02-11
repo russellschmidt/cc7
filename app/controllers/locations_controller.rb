@@ -50,5 +50,4 @@ class LocationsController < ApplicationController
       params.require(:location).permit(:name, :slug)
     end
 
-
 end

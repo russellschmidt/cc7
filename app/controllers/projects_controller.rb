@@ -11,10 +11,12 @@ class ProjectsController < ApplicationController
 
   private
     def find_location
-      @location = Location.friendly.find(params[:location_id]) unless params[:location_id].nil?
+      @location = Location.friendly.find(params[:location_id])
     end
 
     def project_params
+      params.require(:project).permit(:name, :slug, :blurb, :description,
+        :location_id, :partner_id)
     end
 
 end

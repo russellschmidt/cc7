@@ -3,7 +3,7 @@
   <% if @partners.present? %>
     <h2>partners</h2>
     <ul>
-    <% @partners.each do |location| %>
+    <% @partners.each do |partner| %>
       <li><%= link_to partner.name, partner_path(partner) %>
           <%= link_to 'Edit', edit_partner_path(partner) %>
           <%= link_to 'Delete', partner, method: :delete,

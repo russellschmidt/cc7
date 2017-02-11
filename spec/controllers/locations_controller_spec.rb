@@ -79,4 +79,50 @@ describe LocationsController do
     end
   end
 
+  describe "PUT update with signed in admin" do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location, name: "San Diego")
+    end
+
+    context "valid attributes" do
+      it "located the requested location" do
+        put :update, id: @location, location: FactoryGirl.attributes_for(:location)
+        expect(assigns(:location)).to eq(@location)
+      end
+
+      it "changes @location's attributes" do
+        new_name = "San Clamato"
+        put :update, id: @location, location: FactoryGirl.attributes_for(:location, name: new_name)
+        @location.reload
+        expect(@location.name).to eq(new_name)
+      end
+
+      it "redirects to the updated location" do
+        put :update, id: @location, location: FactoryGirl.attributes_for(:location)
+        expect(response).to redirect_to locations_path
+      end
+    end
+
+    context "invalid attributes" do
+      it "locates the requested @location" do
+        put :update, id: @location, location: FactoryGirl.attributes_for(:badplace)
+        expect(assigns(:location)).to eq(@location)
+      end
+
+      it "does not change @location's attributes" do
+        put :update, id: @location,
+          location: FactoryGirl.attributes_for(:location, name: nil)
+        @location.reload
+        expect(@location.name).to_not eq(nil)
+      end
+
+      it "re-renders the edit method" do
+        put :update, id: @location, location: FactoryGirl.attributes_for(:badplace)
+        expect(response).to render_template :edit
+      end
+    end
+
+  end
+
 end

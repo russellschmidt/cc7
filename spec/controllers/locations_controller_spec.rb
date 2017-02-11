@@ -122,7 +122,24 @@ describe LocationsController do
         expect(response).to render_template :edit
       end
     end
+  end
 
+  describe 'DELETE destroy' do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+    end
+
+    it "deletes the location" do
+      expect{
+        delete :destroy, id: @location
+      }.to change(Location,:count).by(-1)
+    end
+
+    it "redirects to location#index" do
+      delete :destroy, id: @location
+      expect(response).to redirect_to locations_path
+    end
   end
 
 end

@@ -1,8 +1,14 @@
 require 'rails_helper'
+# include Devise::Test::ControllerHelpers
+
+def admin_sign_in
+  admin = FactoryGirl.create(:admin)
+  sign_in admin
+end
 
 describe LocationsController do
 
-  describe "GET actions" do
+  describe "GET index and show actions" do
     before :each do
       @location = FactoryGirl.create(:location)
     end
@@ -33,21 +39,44 @@ describe LocationsController do
   end
 
 
-  # describe "GET #new" do
-  #   it "assigns a new location to @location"
-  #   it "renders the :new template"
-  # end
+  describe "GET #new with signed in admin" do
+    it "renders the :new template" do
+      admin_sign_in
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
 
-  # describe "POST #create" do
-  #   context "with valid attributes" do
-  #     it "saves the location to the database"
-  #     it "redirects to locations#index"
-  #   end
+  describe "POST #create with signed in admin" do
+    before :each do
+      admin_sign_in
+    end
 
-  #   context "with invalid attributes" do
-  #     it "does not save the new contact in the database"
-  #     it "re-renders the :new template"
-  #   end
-  # end
+    context "with valid attributes" do
+      it "creates a new contact" do
+        expect{
+          post :create, location: FactoryGirl.attributes_for(:location)
+        }.to change(Location, :count).by(1)
+      end
+
+      it "redirects to locations#index" do
+        post :create, location: FactoryGirl.attributes_for(:location)
+        expect(response).to redirect_to locations_path
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not save the new contact in the database" do
+        expect {
+          post :create, location: FactoryGirl.attributes_for(:badplace)
+        }.to_not change(Location, :count)
+      end
+
+      it "re-renders the :new template" do
+        post :create, location: FactoryGirl.attributes_for(:badplace)
+        expect(response).to render_template :new
+      end
+    end
+  end
 
 end

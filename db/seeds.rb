@@ -7,5 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Location.delete_all
-loc = Location.new(name:"Los Angeles", slug="los-angeles")
+loc = Location.new(name:"Los Angeles", slug:"los-angeles")
 loc.save
+
+Partner.delete_all
+partner = Partner.new(name: "The Bay Foundation", slug:"the_bay_foundation",
+  logo_aws_url: "https://s3.amazonaws.com/climatecents/logos/Bay-Foundation-logo-155x155.png")
+partner.save

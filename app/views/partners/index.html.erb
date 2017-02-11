@@ -1,0 +1,26 @@
+<h1>Partners</h1>
+<% if admin_signed_in? %>
+  <% if @partners.present? %>
+    <h2>partners</h2>
+    <ul>
+    <% @partners.each do |location| %>
+      <li><%= link_to partner.name, partner_path(partner) %>
+          <%= link_to 'Edit', edit_partner_path(partner) %>
+          <%= link_to 'Delete', partner, method: :delete,
+              data: { confirm: "You want to delete this Partner?"} %>
+
+          </li>
+    <% end %>
+    <ul>
+  <% end %>
+  <%= link_to 'Create partner', new_partner_path, class: 'btn btn-default' %>
+<% else %>
+  <% if @partners.present? %>
+    <h2>Partners</h2>
+    <ul>
+    <% @partners.each do |partner| %>
+      <li><%= link_to partner.name, partner_path(partner) %></li>
+    <% end %>
+    <ul>
+  <% end %>
+<% end %>

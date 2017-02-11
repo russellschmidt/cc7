@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   end
   resources :locations, only: [:index, :show]
 
-  resources :partners
+  authenticate :admin do
+    resources :partners, only: [:new, :create, :edit, :update, :destroy]
+  end
+  resources :partners, only: [:index, :show]
+
 end

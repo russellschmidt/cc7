@@ -40,8 +40,8 @@ class PartnersController < ApplicationController
   end
 
   def destroy
-    partner.friendly.find(params[:id]).destroy
-    flash[:success] = "partner deleted"
+    Partner.friendly.find(params[:id]).destroy
+    flash[:success] = "Partner deleted"
     redirect_to partners_path
   end
 

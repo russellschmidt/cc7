@@ -1,5 +1,4 @@
 require 'rails_helper'
-# include Devise::Test::ControllerHelpers
 
 def admin_sign_in
   admin = FactoryGirl.create(:admin)
@@ -14,7 +13,7 @@ describe LocationsController do
     end
 
     context "GET #index" do
-      it "populates a list of contacts" do
+      it "populates a list of locations" do
         get :index
         expect(assigns(:locations)).to eq([@location])
       end

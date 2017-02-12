@@ -87,50 +87,51 @@ describe ProjectsController do
     end
   end
 
-  # describe "PUT update with signed in admin" do
-  #   before :each do
-  #     admin_sign_in
-  #     @partner = FactoryGirl.create(:partner, name: "San Diego Service Friends")
-  #   end
+  describe "PUT update with signed in admin" do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id, name: "Magic Turkey Fun")
+    end
 
-  #   context "valid attributes" do
-  #     it "located the requested partner" do
-  #       put :update, id: @partner, partner: FactoryGirl.attributes_for(:partner)
-  #       expect(assigns(:partner)).to eq(@partner)
-  #     end
+    context "valid attributes" do
+      it "located the requested partner" do
+        put :update, location_id: @location, id: @project, project: FactoryGirl.attributes_for(:project)
+        expect(assigns(:project)).to eq(@project)
+      end
 
-  #     it "changes @partner's attributes" do
-  #       new_name = "San Clamato Service Corps"
-  #       put :update, id: @partner, partner: FactoryGirl.attributes_for(:partner, name: new_name)
-  #       @partner.reload
-  #       expect(@partner.name).to eq(new_name)
-  #     end
+      it "changes @project's attributes" do
+        new_name = "Super Fun Project"
+        put :update, location_id: @location, id: @project, project: FactoryGirl.attributes_for(:project, name: new_name)
+        @project.reload
+        expect(@project.name).to eq(new_name)
+      end
 
-  #     it "redirects to the updated partner" do
-  #       put :update, id: @partner, partner: FactoryGirl.attributes_for(:partner)
-  #       expect(response).to redirect_to partners_path
-  #     end
-  #   end
+      it "redirects to the updated project" do
+        put :update, location_id: @location, id: @project, project: FactoryGirl.attributes_for(:project)
+        expect(response).to redirect_to location_projects_path
+      end
+    end
 
-  #   context "invalid attributes" do
-  #     it "locates the requested @partner" do
-  #       put :update, id: @partner, partner: FactoryGirl.attributes_for(:badpartner)
-  #       expect(assigns(:partner)).to eq(@partner)
-  #     end
+    context "invalid attributes" do
+      it "locates the requested @project" do
+        put :update, location_id: @location, id: @project, project: FactoryGirl.attributes_for(:badproject)
+        expect(assigns(:project)).to eq(@project)
+      end
 
-  #     it "does not change @partner's attributes" do
-  #       put :update, id: @partner,
-  #         partner: FactoryGirl.attributes_for(:partner, name: nil)
-  #       @partner.reload
-  #       expect(@partner.name).to_not eq(nil)
-  #     end
+      it "does not change @project's attributes" do
+        put :update, location_id: @location, id: @project,
+          project: FactoryGirl.attributes_for(:project, name: nil)
+        @project.reload
+        expect(@project.name).to_not eq(nil)
+      end
 
-  #     it "re-renders the edit method" do
-  #       put :update, id: @partner, partner: FactoryGirl.attributes_for(:badpartner)
-  #       expect(response).to render_template :edit
-  #     end
-  #   end
-  # end
+      it "re-renders the edit method" do
+        put :update, location_id: @location, id: @project, project: FactoryGirl.attributes_for(:badproject)
+        expect(response).to render_template :edit
+      end
+    end
+  end
 
   # describe 'DELETE destroy' do
   #   before :each do

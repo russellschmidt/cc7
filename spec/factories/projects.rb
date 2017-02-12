@@ -8,4 +8,13 @@ FactoryGirl.define do
     blurb { Faker::ChuckNorris }
     description { Faker::TwinPeaks.quote }
   end
+
+  factory :badproject, parent: :location do
+    name nil
+    partner_id 1
+    location_id 20
+    blurb { Faker::ChuckNorris }
+    description { Faker::TwinPeaks.quote }
+  end
+
 end

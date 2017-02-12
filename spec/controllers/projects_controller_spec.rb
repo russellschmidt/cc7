@@ -38,47 +38,54 @@ describe ProjectsController do
     end
   end
 
-
-
   describe "GET #new with signed in admin" do
-    it "renders the :new template" do
-      admin_sign_in
-      get :new
-      expect(response).to render_template(:new)
+    before :each do
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+    end
+
+    context "NEW action" do
+      it "renders the :new template" do
+        admin_sign_in
+        get :new, location_id: @location
+        expect(response).to render_template(:new)
+      end
     end
   end
 
-  # describe "POST #create with signed in admin" do
-  #   before :each do
-  #     admin_sign_in
-  #   end
+  describe "POST #create with signed in admin" do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+    end
 
-  #   context "with valid attributes" do
-  #     it "creates a new contact" do
-  #       expect{
-  #         post :create, partner: FactoryGirl.attributes_for(:partner)
-  #       }.to change(Partner, :count).by(1)
-  #     end
+    context "with valid attributes" do
+      it "creates a new contact" do
+        expect{
+          post :create, location_id: @location, project: FactoryGirl.attributes_for(:project)
+        }.to change(Project, :count).by(1)
+      end
 
-  #     it "redirects to partners#index" do
-  #       post :create, partner: FactoryGirl.attributes_for(:partner)
-  #       expect(response).to redirect_to partners_path
-  #     end
-  #   end
+      it "redirects to project#index" do
+        post :create, location_id: @location, project: FactoryGirl.attributes_for(:project)
+        expect(response).to redirect_to location_projects_path
+      end
+    end
 
-  #   context "with invalid attributes" do
-  #     it "does not save the new contact in the database" do
-  #       expect {
-  #         post :create, partner: FactoryGirl.attributes_for(:badpartner)
-  #       }.to_not change(Partner, :count)
-  #     end
+    context "with invalid attributes" do
+      it "does not save the new contact in the database" do
+        expect {
+          post :create, location_id: @location, project: FactoryGirl.attributes_for(:badproject)
+        }.to_not change(Project, :count)
+      end
 
-  #     it "re-renders the :new template" do
-  #       post :create, partner: FactoryGirl.attributes_for(:badpartner)
-  #       expect(response).to render_template :new
-  #     end
-  #   end
-  # end
+      it "re-renders the :new template" do
+        post :create, location_id: @location, project: FactoryGirl.attributes_for(:badproject)
+        expect(response).to render_template :new
+      end
+    end
+  end
 
   # describe "PUT update with signed in admin" do
   #   before :each do

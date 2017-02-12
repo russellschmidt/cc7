@@ -39,13 +39,14 @@ describe ProjectsController do
   end
 
 
-  # describe "GET #new with signed in admin" do
-  #   it "renders the :new template" do
-  #     admin_sign_in
-  #     get :new
-  #     expect(response).to render_template(:new)
-  #   end
-  # end
+
+  describe "GET #new with signed in admin" do
+    it "renders the :new template" do
+      admin_sign_in
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
 
   # describe "POST #create with signed in admin" do
   #   before :each do

@@ -8,14 +8,17 @@ Rails.application.routes.draw do
   resources :partners, only: [:index, :show]
 
   resources :locations, only: [:index, :show] do
+
+    authenticate :admin do
+      resources :projects, only: [:new, :create, :edit, :update, :destroy]
+    end
+
     resources :projects, only: [:index, :show]
   end
 
   authenticate :admin do
     resources :locations, only: [:new, :create, :edit, :update, :destroy]
     resources :partners, only: [:new, :create, :edit, :update, :destroy]
-    resources :projects, only: [:new, :create, :edit, :update, :destroy]
   end
-
 
 end

@@ -1,1 +1,9 @@
-<h1>show</h1>
+<h1><%= @location.name %></h1>
+<h2>Projects</h2>
+<% if @location.projects.present? %>
+  <% @location.projects.each do |project| %>
+    <ul>
+      <li><%= link_to project.name, location_projects_path(@location) %></li>
+    </ul>
+  <% end %>
+<% end %>

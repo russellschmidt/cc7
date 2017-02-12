@@ -3,6 +3,16 @@
   <% @projects.each do |project| %>
     <h2><%= project.name %></h2>
     <p><%= project.blurb %></p>
-
+    <% if admin_signed_in? %>
+      <%= link_to 'edit', edit_location_project_path(@location, project), class: "btn btn-default" %>
+      <%= link_to 'delete', location_project_path(@location, project), method: :delete, class: 'btn btn-default', data: {confirm: "Are you sure you want to delete this project?"} %>
+    <% end %>
   <% end %>
+<% end %>
+
+<% if admin_signed_in? %>
+  <hr />
+  <div>
+    <%= link_to 'Create Project', new_location_project_path, class: "btn btn-default" %>
+  </div>
 <% end %>

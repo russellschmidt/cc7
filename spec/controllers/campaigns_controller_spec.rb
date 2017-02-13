@@ -136,4 +136,24 @@ describe CampaignsController do
     end
   end
 
+  describe 'DELETE destroy' do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+      @campaign = FactoryGirl.create(:campaign, project_id: @project.id, name: "September 2000")
+    end
+
+    it "deletes the project" do
+      expect{
+        delete :destroy, location_id: @location, project_id: @project, id: @campaign
+      }.to change(Campaign,:count).by(-1)
+    end
+
+    it "redirects to project#index" do
+      delete :destroy, location_id: @location, project_id: @project, id: @campaign
+      expect(response).to redirect_to location_project_campaigns_path
+    end
+  end
+
 end

@@ -32,5 +32,8 @@ module Cc7
         request_specs: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    # set local time zone
+    config.time_zone = "Pacific Time (US & Canada)"
   end
 end

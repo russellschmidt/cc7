@@ -41,6 +41,9 @@ class CampaignsController < ApplicationController
   end
 
   def destroy
+    Campaign.friendly.find(params[:id]).destroy
+    flash[:success] = "Campaign deleted"
+    redirect_to location_project_campaigns_path
   end
 
   private

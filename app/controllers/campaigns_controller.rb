@@ -30,6 +30,14 @@ class CampaignsController < ApplicationController
   end
 
   def update
+    @campaign = @project.campaigns.friendly.find(params[:id])
+    if @campaign.update_attributes(campaign_params)
+      flash[:notice] = 'Updated campaign successfully'
+      redirect_to location_project_campaigns_path
+    else
+      flash[:notice] = 'Save error, please try again'
+      render :edit
+    end
   end
 
   def destroy

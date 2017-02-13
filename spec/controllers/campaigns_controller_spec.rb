@@ -90,4 +90,50 @@ describe CampaignsController do
     end
   end
 
+  describe "PUT update with signed in admin" do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+      @campaign = FactoryGirl.create(:campaign, project_id: @project.id, name: "September 2000")
+    end
+
+    context "valid attributes" do
+      it "located the requested campaign" do
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:campaign)
+        expect(assigns(:campaign)).to eq(@campaign)
+      end
+
+      it "changes @campaign's attributes" do
+        new_name = "Super Fun Project"
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:campaign, name: new_name)
+        @campaign.reload
+        expect(@campaign.name).to eq(new_name)
+      end
+
+      it "redirects to the updated campaign" do
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:campaign)
+        expect(response).to redirect_to location_project_campaigns_path
+      end
+    end
+
+    context "invalid attributes" do
+      it "locates the requested @campaign" do
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:badcampaign)
+        expect(assigns(:campaign)).to eq(@campaign)
+      end
+
+      it "does not change @campaign's attributes" do
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:campaign, name: nil)
+        @campaign.reload
+        expect(@campaign.name).to_not eq(nil)
+      end
+
+      it "re-renders the edit method" do
+        put :update, location_id: @location, project_id: @project, id: @campaign, campaign: FactoryGirl.attributes_for(:campaign, name: nil)
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
 end

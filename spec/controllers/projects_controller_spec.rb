@@ -40,13 +40,13 @@ describe ProjectsController do
 
   describe "GET #new with signed in admin" do
     before :each do
+      admin_sign_in
       @location = FactoryGirl.create(:location)
       @project = FactoryGirl.create(:project, location_id: @location.id)
     end
 
     context "NEW action" do
       it "renders the :new template" do
-        admin_sign_in
         get :new, location_id: @location
         expect(response).to render_template(:new)
       end
@@ -74,7 +74,7 @@ describe ProjectsController do
     end
 
     context "with invalid attributes" do
-      it "does not save the new contact in the database" do
+      it "does not save the new project in the database" do
         expect {
           post :create, location_id: @location, project: FactoryGirl.attributes_for(:badproject)
         }.to_not change(Project, :count)

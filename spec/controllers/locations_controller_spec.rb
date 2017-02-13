@@ -65,7 +65,7 @@ describe LocationsController do
     end
 
     context "with invalid attributes" do
-      it "does not save the new contact in the database" do
+      it "does not save the new location in the database" do
         expect {
           post :create, location: FactoryGirl.attributes_for(:badplace)
         }.to_not change(Location, :count)

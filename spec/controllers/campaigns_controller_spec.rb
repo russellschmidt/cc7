@@ -41,6 +41,7 @@ describe CampaignsController do
 
   describe "GET #new with signed in admin" do
     before :each do
+      admin_sign_in
       @location = FactoryGirl.create(:location)
       @project = FactoryGirl.create(:project, location_id: @location.id)
       @campaign = FactoryGirl.create(:campaign, project_id: @project.id)
@@ -48,9 +49,43 @@ describe CampaignsController do
 
     context "NEW action" do
       it "renders the :new template" do
-        admin_sign_in
         get :new, project_id: @project, location_id: @location
         expect(response).to render_template(:new)
+      end
+    end
+  end
+
+  describe "POST #create with signed in admin" do
+    before :each do
+      admin_sign_in
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+      @campaign = FactoryGirl.create(:campaign, project_id: @project.id)
+    end
+
+    context "with valid attributes" do
+      it "creates a new contact" do
+        expect{
+          post :create, location_id: @location, project_id: @project, campaign: FactoryGirl.attributes_for(:campaign)
+        }.to change(Campaign, :count).by(1)
+      end
+
+      it "redirects to campaign#index" do
+        post :create, location_id: @location, project_id: @project, campaign: FactoryGirl.attributes_for(:campaign)
+        expect(response).to redirect_to location_project_campaigns_path
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not save the new campaign in the database" do
+        expect {
+          post :create, location_id: @location, project_id: @project, campaign: FactoryGirl.attributes_for(:badcampaign)
+        }.to_not change(Campaign, :count)
+      end
+
+      it "re-renders the :new template" do
+        post :create, location_id: @location, project_id: @project, campaign: FactoryGirl.attributes_for(:badcampaign)
+        expect(response).to render_template :new
       end
     end
   end

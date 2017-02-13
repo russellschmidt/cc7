@@ -15,6 +15,14 @@ class CampaignsController < ApplicationController
   end
 
   def create
+    @campaign = @project.campaigns.build(campaign_params)
+    if @campaign.save
+      flash[:notice] = "Successfully created project."
+      redirect_to location_project_campaigns_path
+    else
+      flash[:notice] = "Create error, please try again."
+      render :new
+    end
   end
 
   def edit
@@ -28,7 +36,7 @@ class CampaignsController < ApplicationController
 
   private
     def campaign_params
-
+      params.require(:campaign).permit(:name, :slug, :description, :dollar_goal, :start_date, :end_date, :time_zone, :active?, :project_id)
     end
 
     def find_location

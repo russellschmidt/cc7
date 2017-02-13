@@ -24,4 +24,6 @@ FactoryGirl.define do
     time_zone "Tijuana"
     active? true
   end
+
+
 end

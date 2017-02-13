@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :partners, only: [:index, :show]
+  resources :campaigns, only: [:index, :show]
 
   resources :locations, only: [:index, :show] do
-
     authenticate :admin do
       resources :projects, only: [:new, :create, :edit, :update, :destroy]
     end
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   authenticate :admin do
     resources :locations, only: [:new, :create, :edit, :update, :destroy]
     resources :partners, only: [:new, :create, :edit, :update, :destroy]
+    resources :campaigns, only: [:new, :create, :edit, :update, :destroy]
   end
 
 end

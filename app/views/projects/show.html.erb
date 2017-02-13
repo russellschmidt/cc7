@@ -5,3 +5,12 @@
 <% else %>
   <h2>No project found</h2>
 <% end %>
+
+<% if @project.campaigns.present? %>
+  <h2>Campaigns</h2>
+  <ul>
+    <% @project.campaigns.each do |campaign| %>
+      <h4><%= link_to campaign.name, location_project_campaign_path(@location, @project, location) %></h4>
+    <% end %>
+  </ul>
+<% end %>

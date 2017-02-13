@@ -1,0 +1,14 @@
+<h1>Campaign</h1>
+<h3><%= @campaign.name %></h3>
+<p><%= @campaign.description %></p>
+<p>Goal: <%= @campaign.dollar_goal %></p>
+<p>Start Date: <%= @campaign.start_date %></p>
+<p>End Date: <%= @campaign.end_date %></p>
+<p>Time Zone: <%= @campaign.time_zon %></p>
+<p>
+  <% if active? %>
+  Active campaign
+  <% else %>
+  Inactive campaign
+  <% end %>
+</p>

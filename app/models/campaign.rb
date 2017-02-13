@@ -6,7 +6,7 @@ class Campaign < ApplicationRecord
   validates_presence_of :name, :slug
   validates_uniqueness_of :name, :slug
 
-  belongs_to :project_id
+  belongs_to :project
 
   default_scope {order(end_date: :desc)}
 end

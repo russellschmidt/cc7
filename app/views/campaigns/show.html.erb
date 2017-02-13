@@ -4,9 +4,9 @@
 <p>Goal: <%= @campaign.dollar_goal %></p>
 <p>Start Date: <%= @campaign.start_date %></p>
 <p>End Date: <%= @campaign.end_date %></p>
-<p>Time Zone: <%= @campaign.time_zon %></p>
+<p>Time Zone: <%= @campaign.time_zone %></p>
 <p>
-  <% if active? %>
+  <% if @campaign.active? %>
   Active campaign
   <% else %>
   Inactive campaign
@@ -16,6 +16,6 @@
 <% if admin_signed_in? %>
   <hr />
   <div>
-    <%= link_to 'Edit Campaign', location_project_campaign_path(@location, @project, @campaign), class: "btn btn-default" %>
+    <%= link_to 'Edit Campaign', edit_location_project_campaign_path(@location, @project, @campaign), class: "btn btn-default" %>
   </div>
 <% end %>

@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+    @campaign = @project.campaigns.friendly.find(params[:id])
   end
 
   def update

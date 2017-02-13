@@ -11,7 +11,7 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new
+    @campaign = @project.campaigns.new
   end
 
   def create

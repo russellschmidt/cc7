@@ -12,3 +12,10 @@
   Inactive campaign
   <% end %>
 </p>
+
+<% if admin_signed_in? %>
+  <hr />
+  <div>
+    <%= link_to 'Edit Campaign', location_project_campaign_path(@location, @project, @campaign), class: "btn btn-default" %>
+  </div>
+<% end %>

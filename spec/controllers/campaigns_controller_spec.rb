@@ -39,4 +39,20 @@ describe CampaignsController do
     end
   end
 
+  describe "GET #new with signed in admin" do
+    before :each do
+      @location = FactoryGirl.create(:location)
+      @project = FactoryGirl.create(:project, location_id: @location.id)
+      @campaign = FactoryGirl.create(:campaign, project_id: @project.id)
+    end
+
+    context "NEW action" do
+      it "renders the :new template" do
+        admin_sign_in
+        get :new, project_id: @project, location_id: @location
+        expect(response).to render_template(:new)
+      end
+    end
+  end
+
 end

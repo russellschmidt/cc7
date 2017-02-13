@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :locations, only: [:index, :show] do
     authenticate :admin do
-      resources :projects, only: [:new, :create, :edit, :update, :destroy]
+      resources :projects, only: [:new, :create, :edit, :update, :destroy] do
+        resources :campaigns, only: [:new, :create, :edit, :update, :destroy]
+      end
     end
 
     resources :projects, only: [:index, :show] do
@@ -20,7 +22,6 @@ Rails.application.routes.draw do
   authenticate :admin do
     resources :locations, only: [:new, :create, :edit, :update, :destroy]
     resources :partners, only: [:new, :create, :edit, :update, :destroy]
-    resources :campaigns, only: [:new, :create, :edit, :update, :destroy]
   end
 
 end

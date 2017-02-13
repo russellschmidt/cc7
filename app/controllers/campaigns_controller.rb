@@ -1,15 +1,17 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show]
+  before_action :find_location, :find_project
 
   def index
-    @campaigns = Campaign.all
+    @campaigns = @project.campaigns.all
   end
 
   def show
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = @project.campaigns.friendly.find(params[:id])
   end
 
   def new
+    @campaign = Campaign.new
   end
 
   def create
@@ -29,4 +31,14 @@ class CampaignsController < ApplicationController
 
     end
 
+    def find_location
+      @location = Location.friendly.find(params[:location_id])
+    end
+
+    def find_project
+      if @location.nil?
+        find_location
+      end
+      @project = @location.projects.friendly.find(params[:project_id])
+    end
 end

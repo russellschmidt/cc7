@@ -1,4 +1,4 @@
-<h1>This is a rails rail </h1>
+<h1>Climate Cents</h1>
 <nav>
   <% if donor_signed_in? %>
     <ul>
@@ -20,11 +20,20 @@
 
 <section>
   <%= link_to 'locations', locations_path %>
+  <% if @locations.present? %>
+    <ul>
+      <% @locations.each do |location| %>
+        <li><%= link_to location.name, location_path(location) %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </section>
 
 <% if @partners.present? %>
   <%= link_to 'Partners', partners_path %>
+  <ul>
   <% @partners.each do |partner| %>
-    <%= link_to partner.name, partner_path(partner) %>
+    <li><%= link_to partner.name, partner_path(partner) %></li>
   <% end %>
+  </ul>
 <% end %>

@@ -7,10 +7,10 @@
 <% end %>
 
 <% if @project.campaigns.present? %>
-  <h2>Campaigns</h2>
+  <h2>Project</h2>
   <ul>
     <% @project.campaigns.each do |campaign| %>
-      <h4><%= link_to campaign.name, location_project_campaign_path(@location, @project, location) %></h4>
+      <h4><%= link_to campaign.name, location_project_campaign_path(@location, @project, campaign) %></h4>
     <% end %>
   </ul>
 <% end %>

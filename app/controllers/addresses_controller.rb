@@ -1,19 +1,12 @@
 class AddressesController < ApplicationController
 
   def new
-    @address = Address.new
+    @context = context
+    @address = @context.addresses.new
   end
 
   def create
-    @addressable = find_addressable
-    @address = addressable.address.build(address_params)
-    if @address.save
-      flash[:notice] = 'Created address successfully'
-      redirect_to partners_path
-    else
-      flash[:notice] = 'Save error, please try again'
-      render :new
-    end
+
   end
 
   def edit
@@ -38,4 +31,9 @@ class AddressesController < ApplicationController
         end
       end
     end
+
+    def context
+      if params[:admin_id]
+        Admin.find(params[:admin_id])
+
 end

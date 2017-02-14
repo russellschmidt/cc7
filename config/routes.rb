@@ -26,19 +26,19 @@ Rails.application.routes.draw do
 
   # start polymorphic address/addressableassociations
   resources :partners do
-    resources :addresses, only: [:new, :create, :edit, :update, :destroy]
+    resources :addresses, only: [:new, :create, :edit, :update]
   end
 
   resources :projects do
-    resources :addresses, only: [:new, :create, :edit, :update, :destroy]
+    resources :addresses, only: [:new, :create, :edit, :update]
   end
 
   resources :donors do
-    resources :addresses, only: [:new, :create, :edit, :update, :destroy]
+    resources :addresses, only: [:new, :create, :edit, :update]
   end
 
   resources :admins do
-    resources :addresses, only: [:new, :create, :edit, :update, :destroy]
+    resources :addresses, only: [:new, :create, :edit, :update]
   end
   # end polymorphic address/addressable associations
 end

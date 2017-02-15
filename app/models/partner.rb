@@ -6,7 +6,7 @@ class Partner < ApplicationRecord
   validates_presence_of :name, :slug
 
   has_many :projects
-  has_one :address, as: :addressable
+  has_many :addresses, as: :addressable
 
   default_scope {order(name: :asc)}
 end

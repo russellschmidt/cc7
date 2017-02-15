@@ -7,7 +7,7 @@ class AddressesController < ApplicationController
 
   def create
     @context = context
-    @address = @context.addresses.new(address_params)
+    @address = @context.addresses.build(address_params)
 
     if @address.save
       flash[:notice] = 'Created address successfully'
@@ -54,9 +54,9 @@ class AddressesController < ApplicationController
       if params[:admin_id]
         id = params[:admin_id]
         Admin.find(params[:admin_id])
-      elsif params[:user_id]
-        id = params[:user_id]
-        User.find(params[:user_id])
+      elsif params[:donor_id]
+        id = params[:donor_id]
+        Donor.find(params[:donor_id])
       elsif params[:project_id]
         id = params[:project_id]
         Project.friendly.find(params[:project_id])
@@ -68,13 +68,13 @@ class AddressesController < ApplicationController
 
     def context_url(context)
       if Admin === context
-        admin_path(context)
-      elsif User === context
-        user_path(context)
+        edit_admin_password_path(context)
+      elsif Donor === context
+        edit_donor_password_path(context)
       elsif Project === context
         project_path(context)
       elsif Partner === context
-        partner_path(partner)
+        partner_path(context)
       end
     end
 

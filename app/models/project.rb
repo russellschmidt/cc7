@@ -10,7 +10,7 @@ class Project < ApplicationRecord
   belongs_to :location
 
   has_many :campaigns
-  has_one :address, as: :addressable
+  has_many :addresses, as: :addressable
 
   default_scope {order(name: :asc)}
 end

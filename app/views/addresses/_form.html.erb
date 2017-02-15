@@ -1,4 +1,5 @@
-<%= form_for(context, address) do |f| %>
+<%= form_for([context, address]) do |f| %>
+
   <div class="form-group">
     <%= f.label :street1 %>
     <%= f.text_field :street1, class: "form-control" %>

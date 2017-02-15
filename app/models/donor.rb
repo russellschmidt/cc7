@@ -4,5 +4,5 @@ class Donor < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :address, as: :addressable
+  has_many :addresses, as: :addressable
 end

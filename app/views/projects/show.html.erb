@@ -14,3 +14,23 @@
     <% end %>
   </ul>
 <% end %>
+
+<% if @project.addresses.last.present? %>
+  <address>
+    <p><%= @project.addresses.last.street1 %></p>
+    <% if @project.addresses.last.street2.present? %>
+      <p><%= @project.addresses.last.street2 %></p>
+    <% end %>
+    <p><%= @project.addresses.last.city %>, <%= @project.addresses.last.state %> <%= @project.addresses.last.zip %></p>
+    <p><%= @project.addresses.last.phone %></p>
+    <p><%= @project.addresses.last.email %></p>
+    <p><%= @project.addresses.last.homepage %></p>
+  </address>
+  <%= link_to 'Edit Address', edit_partner_address_path(@project, @project.addresses.last), class: 'btn btn-default' %>
+<% else %>
+  <% if admin_signed_in? %>
+    <%= link_to 'Add Address?', new_partner_address_path(@project), class: 'btn btn-default' %>
+  <% else %>
+    Address coming soon :\
+  <% end %>
+<% end %>

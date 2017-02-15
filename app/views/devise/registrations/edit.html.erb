@@ -40,4 +40,49 @@
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
+<h3>Address</h3>
+<% if admin_signed_in? %>
+  <% if current_admin.addresses.last.present? %>
+    <address>
+      <p><%= current_admin.addresses.last.street1 %></p>
+      <% if current_admin.addresses.last.street2.present? %>
+        <p><%= current_admin.addresses.last.street2 %></p>
+      <% end %>
+      <p><%= current_admin.addresses.last.city %>, <%= current_admin.addresses.last.state %> <%= current_admin.addresses.last.zip %></p>
+      <p><%= current_admin.addresses.last.phone %></p>
+      <p><%= current_admin.addresses.last.email %></p>
+      <p><%= current_admin.addresses.last.homepage %></p>
+    </address>
+    <%= link_to 'Edit Address', edit_admin_address_path(current_admin, current_admin.addresses.last), class: 'btn btn-default' %>
+  <% else %>
+    <% if admin_signed_in? %>
+      <%= link_to 'Add Address?', new_admin_address_path(current_admin), class: 'btn btn-default' %>
+    <% else %>
+      No Address entered
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if donor_signed_in? %>
+  <% if current_donor.addresses.last.present? %>
+    <address>
+      <p><%= current_donor.addresses.last.street1 %></p>
+      <% if current_donor.addresses.last.street2.present? %>
+        <p><%= current_donor.addresses.last.street2 %></p>
+      <% end %>
+      <p><%= current_donor.addresses.last.city %>, <%= current_donor.addresses.last.state %> <%= current_donor.addresses.last.zip %></p>
+      <p><%= current_donor.addresses.last.phone %></p>
+      <p><%= current_donor.addresses.last.email %></p>
+      <p><%= current_donor.addresses.last.homepage %></p>
+    </address>
+    <%= link_to 'Edit Address', edit_donor_address_path(current_donor, current_donor.addresses.last), class: 'btn btn-default' %>
+  <% else %>
+    <% if donor_signed_in? %>
+      <%= link_to 'Add Address?', new_donor_address_path(current_donor), class: 'btn btn-default' %>
+    <% else %>
+      No Address entered
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= link_to "Back", :back %>

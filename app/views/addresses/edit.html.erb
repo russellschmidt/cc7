@@ -1,1 +1,9 @@
+<h2>Edit Address</h2>
+<h4>
+  <% if @context.email.nil? %>
+    <%= @context.name %>
+  <% else %>
+    <%= @context.email %>
+  <% end %>
+</h4>
 <%= render partial: "form", locals: {context: @context, address: @address} %>

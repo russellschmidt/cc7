@@ -12,6 +12,7 @@ Additional dependencies
 * Bootstrap-SASS 3.3
 * Autoprefixer-Rails
 * Devise 4.2
+* Strip 2.0
 
 Testing
 * rspec-rails

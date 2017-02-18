@@ -44,7 +44,7 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'autoprefixer-rails'
 gem 'friendly_id', '~> 5.1.0'
 
-gem 'stripe', '~> 2.0'
+gem 'stripe-rails'
 # end RS added
 ###
 

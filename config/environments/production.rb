@@ -83,4 +83,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Stripe API keys
+  config.stripe.secret_key = ENV['STRIPE_SECRET_KEY']
+  config.stripe.publishable_key = 'pk_live_kwX2Kao7O5uW767RCSDtQpdU'
+  config.stripe.eager_load = ['donor']
 end

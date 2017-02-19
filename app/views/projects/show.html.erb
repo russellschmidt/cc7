@@ -7,10 +7,13 @@
 <% end %>
 
 <% if @project.campaigns.present? %>
-  <h2>Project</h2>
+  <h2>Campaigns</h2>
   <ul>
     <% @project.campaigns.each do |campaign| %>
       <h4><%= link_to campaign.name, location_project_campaign_path(@location, @project, campaign) %></h4>
+      <% if campaign.end_date > Time.now %>
+        <%= link_to 'Donate', new_donation_path, class: "btn btn-default" %>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

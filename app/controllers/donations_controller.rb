@@ -17,7 +17,7 @@ class DonationsController < ApplicationController
 
   def create
     if stripe_token = params[:stripe_token]
-      if current_donor.do_donor_transaction(params[:payment_type], params[:amount], stripe_token)
+      if current_donor.do_donor_transaction(params[:payment_type], params[:amount_in_cents], stripe_token)
         @donation = Donation.new(donation_params)
         if @donation.save
           redirect_to @donation, notice: 'Card charged successfully! Thank you.'
@@ -55,6 +55,6 @@ class DonationsController < ApplicationController
     end
 
     def donation_params
-      params.fetch(:donation, {})
+      params.require(:donation).permit(:donor_id, :campaign_id, :amount_in_cents)
     end
 end

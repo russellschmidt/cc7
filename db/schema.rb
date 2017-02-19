@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213235505) do
+ActiveRecord::Schema.define(version: 20170219001056) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street1"
@@ -60,6 +60,11 @@ ActiveRecord::Schema.define(version: 20170213235505) do
     t.index ["name"], name: "index_campaigns_on_name", unique: true
     t.index ["project_id"], name: "index_campaigns_on_project_id"
     t.index ["slug"], name: "index_campaigns_on_slug", unique: true
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "donors", force: :cascade do |t|

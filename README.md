@@ -13,6 +13,7 @@ Additional dependencies
 * Autoprefixer-Rails
 * Devise 4.2
 * Stripe-rails
+* Whenever
 
 Testing
 * rspec-rails

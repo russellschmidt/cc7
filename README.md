@@ -12,6 +12,8 @@ Additional dependencies
 * Bootstrap-SASS 3.3
 * Autoprefixer-Rails
 * Devise 4.2
+* Stripe
+* Figaro
 
 Testing
 * rspec-rails

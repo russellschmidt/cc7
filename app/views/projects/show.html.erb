@@ -20,7 +20,7 @@
           </article>
 
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_fm1DXLCkPnRYuFfPmBweEqd9"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="This is a test of $5 buy"
             data-amount="500">
           </script>

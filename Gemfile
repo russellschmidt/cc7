@@ -45,6 +45,8 @@ gem 'autoprefixer-rails'
 gem 'friendly_id', '~> 5.1.0'
 
 gem 'stripe-rails', '~> 0.3.1'
+
+gem 'whenever', require: false
 # end RS added
 ###
 

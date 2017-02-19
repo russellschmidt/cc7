@@ -1,5 +1,42 @@
 <h1>New Donation</h1>
 
-<%= render 'form', donation: @donation %>
+<!-- <%= render 'form', donation: @donation %> -->
+
+<%= form_tag donations_path, id: 'card-details' do %>
+  <div class="payment-errors"></div>
+
+  <div class="form-group">
+    <label for="card-number">Card Number:</label>
+    <input id="card-number" type="text" data-stripe="number" class: "form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="card-exp-month">Card Expiration Month:</label>
+    <input id="card-exp-month" type="text" data-stripe="exp_month" class: "form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="card-exp-year">Card Expiration Year</label>
+    <input id="card-exp-year" type="text" data-stripe="exp_year" class: "form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="card-cvc">CVC:</label>
+    <input id="card-cvc" type="text" data-stripe="cvc" class: "form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="payment-type">Payment Type:</label>
+    <select id="payment-type" name="payment-type">
+      <option value="deposit">$20 Contribution</option>
+      <option value="subscription">Monthly $10 Contribution</option>
+    </select>
+  </div>
+
+  <div>
+    <input type="submit" value="Donate" />
+  </div>
+
+<% end %>
 
 <%= link_to 'Back', donations_path %>

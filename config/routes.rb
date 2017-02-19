@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  resources :charges
+
   resources :partners, only: [:index, :show]
 
   resources :locations, only: [:index, :show] do

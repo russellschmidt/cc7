@@ -17,7 +17,7 @@ class DonationsController < ApplicationController
 
   def create
     if stripe_token = params[:stripe_token]
-      if current_donor.do_deposit_transaction(params[:payment_type], stripe_token)
+      if current_donor.do_donor_transaction(params[:payment_type], params[:amount], stripe_token)
         @donation = Donation.new(donation_params)
         if @donation.save
           redirect_to @donation, notice: 'Card charged successfully! Thank you.'
@@ -31,7 +31,7 @@ class DonationsController < ApplicationController
       flash[:alert] = "Form was not submitted correctly. Please try again."
     end
 
-    redirect_to new_donations_path
+    redirect_to new_donation_path
   end
 
   def update

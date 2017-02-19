@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :donations
-  devise_for :admins
-  devise_for :donors
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root to: "home#index"
 
+  devise_for :admins, :donors
+  # devise_for :donors
+
   resources :partners, only: [:index, :show]
+
+  resources :donations
 
   resources :locations, only: [:index, :show] do
     authenticate :admin do

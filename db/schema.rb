@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219001056) do
+ActiveRecord::Schema.define(version: 20170219183043) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street1"
@@ -63,8 +63,13 @@ ActiveRecord::Schema.define(version: 20170219001056) do
   end
 
   create_table "donations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "donor_id"
+    t.integer  "campaign_id"
+    t.integer  "amount_in_cents"
+    t.index ["campaign_id"], name: "index_donations_on_campaign_id"
+    t.index ["donor_id"], name: "index_donations_on_donor_id"
   end
 
   create_table "donors", force: :cascade do |t|
@@ -80,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170219001056) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "stripe_customer_id"
     t.index ["email"], name: "index_donors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_donors_on_reset_password_token", unique: true
   end

@@ -6,6 +6,8 @@ class Campaign < ApplicationRecord
   validates_presence_of :name, :slug
   validates_uniqueness_of :name, :slug
 
+  has_many :donations
+
   belongs_to :project
 
   default_scope {order(end_date: :desc)}
